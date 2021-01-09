@@ -1,0 +1,7 @@
+Lista de cosas a testear. Con un asterisco lo probado
+=====================================================
+
+- Manejo de rutas con ReactRoutes
+- Manejo de Axios
+- Manejo de Material UI
+- CRUD
