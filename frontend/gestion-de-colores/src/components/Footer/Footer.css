@@ -1,0 +1,12 @@
+.footer-sitio{
+    position: fixed;
+    bottom: 0;
+    padding:5px;
+    width: 100%;
+    background-color: #071e36;
+}
+
+.texto-footer{
+    text-align: center;
+    color:white;
+}
