@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace APITestReact.DTO
 {
-    public class UsuarioDTO
+    public class UsuarioRegistroDTO
     {
         [Required(ErrorMessage = "Se debe proveer un nombre de usuario.")]
         public string Username { get; set; }

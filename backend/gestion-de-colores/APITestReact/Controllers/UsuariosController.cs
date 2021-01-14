@@ -9,6 +9,7 @@ using APITestReact.DBModels;
 using APITestReact.DTO;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -46,15 +47,21 @@ namespace APITestReact.Controllers
 
         // POST usuarios/login
         [HttpPost("login")]
-        public async Task<ActionResult> Login(string username, string password)
+        public async Task<ActionResult> Login([FromBody]UsuarioLoginDTO loginDTO)
         {
+            string username = loginDTO.Username;
+            string password = loginDTO.Password;
+
             //Si el usuario ya esta logeado no puede acceder
             if (User.Identity.IsAuthenticated)
                 return StatusCode(StatusCodes.Status403Forbidden, "Ya estas autenticado.");
 
-            //Comprobando que se enviaron tanto username como password
-            if (String.IsNullOrEmpty(username) || String.IsNullOrEmpty(password))
-                return BadRequest("Se debe enviar tanto usuario como contraseña.");
+            //Comprobando que los datos sean correctos
+            if(!ModelState.IsValid)
+            {
+                string mensajeDeError = ModelState.Values.First().Errors[0].ErrorMessage;
+                return BadRequest(mensajeDeError);
+            }
 
             //Obteniendo y comprobando si el usuario existe
             Usuario usuario = UsuarioDAO.Get(_context, username, password);
@@ -114,7 +121,7 @@ namespace APITestReact.Controllers
 
         //POST usuarios/add
         [HttpPost("add")]
-        public ActionResult Add([FromBody]UsuarioDTO usuarioDTO)
+        public ActionResult Add([FromBody]UsuarioRegistroDTO usuarioDTO)
         {
             Usuario usuario = UsuarioDAO.Get(_context, usuarioDTO.Username);
 

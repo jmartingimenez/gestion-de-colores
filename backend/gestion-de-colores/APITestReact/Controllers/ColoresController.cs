@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using APITestReact.Attributes;
 using APITestReact.DAO;
 using APITestReact.DBModels;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;

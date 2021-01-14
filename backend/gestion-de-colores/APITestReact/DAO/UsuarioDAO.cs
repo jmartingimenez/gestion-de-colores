@@ -36,7 +36,7 @@ namespace APITestReact.DAO
                 .FirstOrDefault();
         }
 
-        public static Usuario Add(APITestReactContext context, UsuarioDTO usuarioDTO)
+        public static Usuario Add(APITestReactContext context, UsuarioRegistroDTO usuarioDTO)
         {
             Usuario usuario = new Usuario();
             usuario.Username = usuarioDTO.Username;

@@ -8,6 +8,7 @@ import {
   Link
 } from "react-router-dom";
 
+import Index from './../../utils/index';
 import Header from './../Header/Header';
 import Main from './../Main/Main';
 import Footer from './../Footer/Footer';
