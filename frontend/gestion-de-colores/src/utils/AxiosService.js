@@ -9,6 +9,9 @@ class AxiosService{
 }
 
 AxiosService.SendRequest = function (method, url, data){
+    //Previniendo respuestas cacheadas
+    url = url + '?timestamp=' + new Date().getTime();
+
     return axios({
         method: method, 
         url: url, 
