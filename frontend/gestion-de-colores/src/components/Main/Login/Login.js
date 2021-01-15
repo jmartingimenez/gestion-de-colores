@@ -1,12 +1,14 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import AxiosService from './../../../utils/AxiosService';
+import AuthContext from '../../../auth-context';
 
 export default function Login(){
     const [inputUsernameLogin, setInputUsernameLogin] = useState("");
     const [inputPasswordLogin, setInputPasswordLogin] = useState("");
+    const usuarioContext = useContext(AuthContext);
 
     const HandleLogin = (e) => {
         e.preventDefault();        
@@ -14,9 +16,8 @@ export default function Login(){
         AxiosService.LoginUser(inputUsernameLogin, inputPasswordLogin)
         .then(login => {
             if(login.esValido){
-                console.log("Login valido: ", login.mensaje);
+                usuarioContext.setLoggedIn(true);
                 /*TO DO
-                - Componente con Logout
                 - Redireccionar otra página
                 */
             }else{

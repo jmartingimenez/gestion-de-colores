@@ -65,4 +65,11 @@ AxiosService.GetUserData = function(){
     return AxiosService.SendRequest(method, url);
 }
 
+AxiosService.LogoutUser = function(){
+    var method = this.HTTP_METHOD_GET;
+    var url = this.API_URL + '/usuarios/logout';
+
+    return AxiosService.SendRequest(method, url);
+}
+
 export default AxiosService;
