@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App/App';
@@ -7,6 +7,16 @@ import reportWebVitals from './reportWebVitals';
 
 const AppWrapper = () => {
   const [loggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    if(localStorage.getItem('userKey')) {
+      setLoggedIn(JSON.parse(localStorage.getItem('userKey')));
+    }
+  }, []);
+  
+  useEffect(() => {
+      localStorage.setItem('userKey', loggedIn);
+  }, [loggedIn]);
 
   return(
     <AuthContext.Provider value={{loggedIn, setLoggedIn}}>

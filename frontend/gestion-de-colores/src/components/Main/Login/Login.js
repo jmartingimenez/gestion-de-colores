@@ -17,6 +17,7 @@ export default function Login(){
         .then(login => {
             if(login.esValido){
                 usuarioContext.setLoggedIn(true);
+                localStorage.setItem('userKey', true);
                 /*TO DO
                 - Redireccionar otra página
                 */

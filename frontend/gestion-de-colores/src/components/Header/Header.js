@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import { AppBar, Toolbar, Typography, Button, Grid } from "@material-ui/core";
 import AxiosService from "../../utils/AxiosService";
 import AuthContext from './../../auth-context.js';
@@ -15,6 +15,7 @@ export default function Header() {
     AxiosService.LogoutUser()
     .then(res => {
       usuarioContext.setLoggedIn(false);
+      localStorage.removeItem('userKey');
     });
   };
 
