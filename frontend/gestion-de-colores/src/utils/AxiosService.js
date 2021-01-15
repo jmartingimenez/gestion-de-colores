@@ -1,24 +1,20 @@
 import axios from 'axios';
 
-//Parámetros en orden utiles para Axios (url, data, headers)
 class AxiosService{
     static API_URL = process.env.REACT_APP_API_URL;
-    static HTTP_OK = 200;
-    static HTTP_BAD_REQUEST = 400;
-    static HTTP_FORBIDDEN = 403;
-    static HTTP_NOT_FOUND = 404;
+    static HTTP_METHOD_GET = 'GET';
+    static HTTP_METHOD_POST = 'POST';
+    static HTTP_METHOD_PUT = 'PUT';
+    static HTTP_METHOD_DELETE = 'DELETE';
 }
 
-AxiosService.LoginUser = function(username, password){
-    return axios.post(this.API_URL + '/usuarios/login', 
-    { 
-        username: username, 
-        password: password 
-    },
-    {
+AxiosService.SendRequest = function (method, url, data){
+    return axios({
+        method: method, 
+        url: url, 
+        data: data,
         withCredentials: true
-    })
-    .then(res => {
+    }).then(res => {
         var respuesta = {
             esValido: true,
             status: res.status,
@@ -26,8 +22,7 @@ AxiosService.LoginUser = function(username, password){
         };
 
         return respuesta;
-    })
-    .catch(err => {  
+    }).catch(err => {
         var respuesta = {
             esValido: false,
             status: err.response.status,
@@ -35,7 +30,39 @@ AxiosService.LoginUser = function(username, password){
         };
         
         return respuesta;
-    });  
+    });
+}
+
+AxiosService.LoginUser = function(username, password){
+    var method = this.HTTP_METHOD_POST;
+    var url = this.API_URL + '/usuarios/login';
+    var data = {
+        username: username,
+        password: password
+    }
+
+    return AxiosService.SendRequest(method, url, data);
+}
+
+AxiosService.AddUser = function(username, password, nombre, apellido, edad){
+    var method = this.HTTP_METHOD_POST;
+    var url = this.API_URL + '/usuarios/add';
+    var data = {
+        username: username,
+        password: password,
+        nombre: nombre,
+        apellido: apellido,
+        edad: edad
+    }
+
+    return AxiosService.SendRequest(method, url, data);
+}
+
+AxiosService.GetUserData = function(){
+    var method = this.HTTP_METHOD_GET;
+    var url = this.API_URL + '/usuarios/me';
+
+    return AxiosService.SendRequest(method, url);
 }
 
 export default AxiosService;

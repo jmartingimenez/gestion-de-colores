@@ -123,6 +123,13 @@ namespace APITestReact.Controllers
         [HttpPost("add")]
         public ActionResult Add([FromBody]UsuarioRegistroDTO usuarioDTO)
         {
+            //Comprobando que los datos sean correctos
+            if (!ModelState.IsValid)
+            {
+                string mensajeDeError = ModelState.Values.First().Errors[0].ErrorMessage;
+                return BadRequest(mensajeDeError);
+            }
+
             Usuario usuario = UsuarioDAO.Get(_context, usuarioDTO.Username);
 
             if (usuario != null)

@@ -14,11 +14,11 @@ export default function Registro(){
     const HandleRegistro = (e) => {
         e.preventDefault();        
        
-        AxiosService.RegistroUser(  inputUsernameRegistro, 
-                                    inputPasswordRegistro, 
-                                    inputNombreRegistro, 
-                                    inputApellidoRegistro, 
-                                    inputEdadRegistro)
+        AxiosService.AddUser(  inputUsernameRegistro, 
+                               inputPasswordRegistro, 
+                               inputNombreRegistro, 
+                               inputApellidoRegistro, 
+                               inputEdadRegistro)
         .then(registro => {
             if(registro.esValido){
                 //                
