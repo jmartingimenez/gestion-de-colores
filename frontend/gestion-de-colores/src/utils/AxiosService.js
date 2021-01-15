@@ -9,8 +9,8 @@ class AxiosService{
     static HTTP_NOT_FOUND = 404;
 }
 
-AxiosService.LoginUser = async function(username, password){
-    return await axios.post(this.API_URL + '/usuarios/login', 
+AxiosService.LoginUser = function(username, password){
+    return axios.post(this.API_URL + '/usuarios/login', 
     { 
         username: username, 
         password: password 

@@ -3,10 +3,6 @@
     padding: 40px 100px 40px 100px;
 }
 
-/* .grid-login, .grid-registro{
-    background-color:rebeccapurple;
-} */
-
 .seccion-principal-titulo{
     font-style: italic;
     font-weight: 600;
@@ -17,8 +13,4 @@
 .divisor{
     padding-left:1.5px;
     padding-right:1.5px;
-}
-
-#btn-login{
-    margin-top:5%;
 }
