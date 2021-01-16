@@ -1,0 +1,16 @@
+.mensaje-api{  
+    color:blue;
+    padding-top: 5%;
+    font-weight: bolder;
+    display: none;
+}
+
+.mensaje-error{
+    display: inline-block;
+    color: red;
+}
+
+.mensaje-success{
+    display: inline-block;
+    color: green;
+}

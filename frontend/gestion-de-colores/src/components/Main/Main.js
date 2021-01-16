@@ -20,9 +20,9 @@ export default function Main() {
     return (
       <section className="seccion-principal">
         <Grid container justify="center" spacing={3}>
-          <Login />
+          <Registro />
           <Divider className="divisor" orientation="vertical" flexItem light={false} />
-          <Registro />          
+          <Login />          
         </Grid>
       </section>
     );
