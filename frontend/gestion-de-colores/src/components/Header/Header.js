@@ -1,5 +1,6 @@
 import React, {useContext, useEffect} from 'react';
 import { AppBar, Toolbar, Typography, Button, Grid } from "@material-ui/core";
+import { useHistory, Link } from 'react-router-dom';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import AxiosService from "../../utils/AxiosService";
@@ -8,6 +9,7 @@ import './Header.css';
 
 export default function Header() {
   const usuarioContext = useContext(AuthContext);
+  const history = useHistory();
 
   const HandleGetUserData = () => {
     AxiosService.GetUserData()
@@ -18,7 +20,6 @@ export default function Header() {
       let nombre = data.Nombre;
       let apellido = data.Apellido;
       let edad = data.Edad;
-
 
       let swalTitulo = nombre + ' ' + apellido + ' (' + username + ')';
       let swalText = 'Tu id: ' + id + '. Tu edad: ' + edad + '.';
@@ -37,15 +38,19 @@ export default function Header() {
     .then(res => {
       usuarioContext.setLoggedIn(false);
       localStorage.removeItem('userKey');
+      history.push('/');
     });
   };
 
   //Logo. Se toma el tamaño del H6, pero el componente es un H1 por tema de accesibilidad
   //Ver: https://medium.com/better-programming/building-a-basic-header-with-materialui-and-react-js-d650f75b4b0a
   const logoAplicacion = (
-    <Typography variant="h6" component="h1">
-      Gestor de colores
-    </Typography>
+    <Link to="/" style={{textDecoration: 'none', color: 'white'}}>
+      <Typography variant="h6" component="h1">
+        Gestor de colores
+      </Typography>
+    </Link>
+
   );
 
   const menuDerecho = (

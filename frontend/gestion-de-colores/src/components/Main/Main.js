@@ -26,4 +26,4 @@ export default function Main() {
         </Grid>
       </section>
     );
-  }
+}

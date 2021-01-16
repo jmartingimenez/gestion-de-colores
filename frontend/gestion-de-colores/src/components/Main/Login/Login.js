@@ -1,4 +1,5 @@
 import React, {useContext, useState, useRef} from 'react';
+import { useHistory } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
@@ -11,6 +12,7 @@ export default function Login(){
     const [inputPasswordLogin, setInputPasswordLogin] = useState("");
     const usuarioContext = useContext(AuthContext);
     const mensajeRef = useRef()
+    const history = useHistory();
 
     const HandleLogin = (e) => {
         e.preventDefault();        
@@ -24,6 +26,7 @@ export default function Login(){
             if(login.esValido){
                 usuarioContext.setLoggedIn(true);
                 localStorage.setItem('userKey', true);
+                history.push('/colores');
                 /*TO DO
                 - Redireccionar otra página
                 */
