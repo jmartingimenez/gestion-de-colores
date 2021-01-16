@@ -4,7 +4,8 @@ import './App.css';
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
 } from "react-router-dom";
 
 import Index from './../../utils/index';
@@ -14,6 +15,8 @@ import Colores from './../Colores/Colores';
 import Footer from './../Footer/Footer';
 import { useEffect, useContext } from 'react';
 import AuthContext from './../../auth-context.js';
+import PrivateRoute from '../Routes/PrivateRoute';
+import PublicRoute from '../Routes/PublicRoute';
 
 export default function App() {
   const usuarioContext = useContext(AuthContext);
@@ -31,10 +34,10 @@ export default function App() {
       <div className="contenedor-componentes">
         <Router>
           <Header />
-
+          
           <Switch>
-            <Route exact path="/" component={Main} />
-            <Route path="/colores" component={Colores} />
+            <PublicRoute restricted={true} component={Main} path="/" exact />
+            <PrivateRoute component={Colores} path="/colores" exact />
           </Switch>
 
           <Footer />
