@@ -1,5 +1,7 @@
 import React, {useContext, useEffect} from 'react';
 import { AppBar, Toolbar, Typography, Button, Grid } from "@material-ui/core";
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 import AxiosService from "../../utils/AxiosService";
 import AuthContext from './../../auth-context.js';
 import './Header.css';
@@ -8,7 +10,26 @@ export default function Header() {
   const usuarioContext = useContext(AuthContext);
 
   const HandleGetUserData = () => {
-    alert("Get user data");
+    AxiosService.GetUserData()
+    .then(res => {
+      let data = res.mensaje;
+      let id = data.Id;
+      let username = data.Username;
+      let nombre = data.Nombre;
+      let apellido = data.Apellido;
+      let edad = data.Edad;
+
+
+      let swalTitulo = nombre + ' ' + apellido + ' (' + username + ')';
+      let swalText = 'Tu id: ' + id + '. Tu edad: ' + edad + '.';
+      let swalFooter = '<a href="https://www.google.com.ar">Obtener datos de todos los usuarios</a>';
+      Swal.fire({
+        icon: 'info',
+        title: swalTitulo,
+        text: swalText,
+        footer: swalFooter
+      })
+    });
   };
 
   const HandleLogout = () => {

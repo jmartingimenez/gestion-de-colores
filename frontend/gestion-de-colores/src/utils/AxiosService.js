@@ -62,7 +62,7 @@ AxiosService.AddUser = function(username, password, nombre, apellido, edad){
 }
 
 AxiosService.GetUserData = function(){
-    var method = this.HTTP_METHOD_GET;
+    var method = this.HTTP_METHOD_POST;
     var url = this.API_URL + '/usuarios/me';
 
     return AxiosService.SendRequest(method, url);
