@@ -5,6 +5,7 @@ import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import AxiosService from "../../utils/AxiosService";
 import AuthContext from './../../auth-context.js';
+import SweetAlertService from './../../utils/SweetAlertService';
 import './Header.css';
 
 export default function Header() {
@@ -21,15 +22,11 @@ export default function Header() {
       let apellido = data.Apellido;
       let edad = data.Edad;
 
-      let swalTitulo = nombre + ' ' + apellido + ' (' + username + ')';
-      let swalText = 'Tu id: ' + id + '. Tu edad: ' + edad + '.';
-      let swalFooter = '<a href="https://www.google.com.ar">Obtener datos de todos los usuarios</a>';
-      Swal.fire({
-        icon: 'info',
-        title: swalTitulo,
-        text: swalText,
-        footer: swalFooter
-      })
+      SweetAlertService.MisDatos(
+        'info', 
+        nombre + ' ' + apellido + ' (' + username + ')', 
+        'Tu id: ' + id + '. Tu edad: ' + edad + '.', 
+        '<a href="https://www.google.com.ar">Obtener datos de todos los usuarios</a>');
     });
   };
 
