@@ -1,8 +1,6 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext} from 'react';
 import { AppBar, Toolbar, Typography, Button, Grid } from "@material-ui/core";
 import { useHistory, Link } from 'react-router-dom';
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
 import AxiosService from "../../utils/AxiosService";
 import AuthContext from './../../auth-context.js';
 import SweetAlertService from './../../utils/SweetAlertService';
@@ -26,8 +24,16 @@ export default function Header() {
         'info', 
         nombre + ' ' + apellido + ' (' + username + ')', 
         'Tu id: ' + id + '. Tu edad: ' + edad + '.', 
-        '<a href="https://www.google.com.ar">Obtener datos de todos los usuarios</a>');
+        'La seccion "Usuarios" permite ver datos de todos.');
     });
+  };
+
+  const HandleRedirectUsuarios = () => {
+    history.push('/usuarios');
+  };
+
+  const HandleRedirectColores = () => {
+    history.push('/colores');
   };
 
   const HandleLogout = () => {
@@ -53,6 +59,8 @@ export default function Header() {
   const menuDerecho = (
     <>
       <Button onClick = {e => HandleGetMyData()} color="inherit">Mis datos</Button>
+      <Button onClick = {e => HandleRedirectUsuarios()} color="inherit">Usuarios</Button>
+      <Button onClick = {e => HandleRedirectColores()} color="inherit">Colores</Button>
       <Button onClick = {e => HandleLogout()} color="inherit">Logout</Button>
     </>
   );

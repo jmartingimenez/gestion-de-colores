@@ -12,6 +12,7 @@ import Index from './../../utils/index';
 import Header from './../Header/Header';
 import Main from './../Main/Main';
 import Colores from './../Colores/Colores';
+import Usuarios from './../Usuarios/Usuarios';
 import Footer from './../Footer/Footer';
 import { useEffect, useContext } from 'react';
 import AuthContext from './../../auth-context.js';
@@ -37,6 +38,7 @@ export default function App() {
           
           <Switch>
             <PublicRoute restricted={true} component={Main} path="/" exact />
+            <PrivateRoute component={Usuarios} path="/usuarios" exact />
             <PrivateRoute component={Colores} path="/colores" exact />
           </Switch>
 

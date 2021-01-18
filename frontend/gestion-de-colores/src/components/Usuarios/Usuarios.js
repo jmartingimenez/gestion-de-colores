@@ -1,4 +1,4 @@
-import './Colores.css';
+import './Usuarios.css';
 import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -12,15 +12,13 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function Colores() {
+export default function Usuarios() {
   const classes = useStyles();
   
   return (
     <section className="seccion-colores">
       <Grid item>
-        <div>
-          Hola mundo!
-        </div>        
+      <TablaUsuarios />      
       </Grid>
     </section>
   )
