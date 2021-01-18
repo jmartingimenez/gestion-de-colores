@@ -12,8 +12,8 @@ export default function Header() {
   const usuarioContext = useContext(AuthContext);
   const history = useHistory();
 
-  const HandleGetUserData = () => {
-    AxiosService.GetUserData()
+  const HandleGetMyData = () => {
+    AxiosService.GetMyData()
     .then(res => {
       let data = res.mensaje;
       let id = data.Id;
@@ -52,7 +52,7 @@ export default function Header() {
 
   const menuDerecho = (
     <>
-      <Button onClick = {e => HandleGetUserData()} color="inherit">Mis datos</Button>
+      <Button onClick = {e => HandleGetMyData()} color="inherit">Mis datos</Button>
       <Button onClick = {e => HandleLogout()} color="inherit">Logout</Button>
     </>
   );

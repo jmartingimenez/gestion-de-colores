@@ -60,10 +60,17 @@ const AxiosService = {
         return this.SendRequest(method, url, data);
     },
     
-    GetUserData: function(){
+    GetMyData: function(){
         var method = this.HTTP_METHOD_POST;
         var url = this.API_URL + '/usuarios/me';
     
+        return this.SendRequest(method, url);
+    },
+
+    GetUsersData: function(){
+        var method = this.HTTP_METHOD_POST;
+        var url = this.API_URL + '/usuarios/';
+
         return this.SendRequest(method, url);
     },
     

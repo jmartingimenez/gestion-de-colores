@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import { Divider } from '@material-ui/core';
+import TablaUsuarios from '../Tablas/TablaUsuarios';
 
 /*Estilo para la grilla definido aca*/
 const useStyles = makeStyles((theme) => ({
@@ -16,8 +17,11 @@ export default function Colores() {
   
   return (
     <section className="seccion-colores">
-      <Grid container justify="center" spacing={3}>
-        <div>Hola mundo!</div>        
+      <Grid item>
+        <div>
+          Hola mundo!
+          <TablaUsuarios />
+        </div>        
       </Grid>
     </section>
   )

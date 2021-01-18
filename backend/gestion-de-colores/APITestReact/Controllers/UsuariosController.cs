@@ -28,21 +28,18 @@ namespace APITestReact.Controllers
         }
 
         //GET usuarios/
-        [HttpGet]
-        public ActionResult Usuarios()
+        [HttpPost]
+        public object[] Usuarios()
         {
             List<Usuario> usuarios = UsuarioDAO.GetAll(_context);
 
-            return new JsonResult(new
-            {
-                Usuarios = usuarios.Select(u => new { 
-                    Id = u.Id,
-                    Username = u.Username,
-                    Nombre = u.Nombre,
-                    Apellido = u.Apellido,
-                    Edad = u.Edad == null ? "Sin definir" : u.Edad.ToString()
-                })
-            });
+            return usuarios.Select(u => new {
+                id = u.Id,
+                username = u.Username,
+                nombre = u.Nombre,
+                apellido = u.Apellido,
+                edad = u.Edad == null ? "Sin definir" : u.Edad.ToString()
+            }).ToArray();
         }
 
         // POST usuarios/login
