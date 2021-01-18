@@ -56,11 +56,16 @@ export default function Header() {
 
   );
 
+  const menuIzquierdo = (
+    <>
+      <Button onClick = {e => HandleRedirectUsuarios()} color="inherit">Usuarios</Button>
+      <Button onClick = {e => HandleRedirectColores()} color="inherit">Colores</Button>
+    </>
+  );
+
   const menuDerecho = (
     <>
       <Button onClick = {e => HandleGetMyData()} color="inherit">Mis datos</Button>
-      <Button onClick = {e => HandleRedirectUsuarios()} color="inherit">Usuarios</Button>
-      <Button onClick = {e => HandleRedirectColores()} color="inherit">Colores</Button>
       <Button onClick = {e => HandleLogout()} color="inherit">Logout</Button>
     </>
   );
@@ -71,7 +76,10 @@ export default function Header() {
         <Grid container justify="space-between">
 
           <Grid item>
-            {logoAplicacion}
+            <Grid container item xs={12}>
+              <Grid item>{logoAplicacion}</Grid>
+              <Grid item>{usuarioContext.loggedIn === true ? <>{menuIzquierdo}</> : ''}</Grid>
+            </Grid>
           </Grid>
 
           <Grid item>
