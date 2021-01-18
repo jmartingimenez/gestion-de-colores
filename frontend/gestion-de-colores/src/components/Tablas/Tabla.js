@@ -22,7 +22,7 @@ export default class Tabla extends React.Component{
             onDownload: (buildHead, buildBody, columns, values) => {
               const fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
               const fileExtension = '.xlsx';
-          
+
               var dataArray = [];
               for (let indexRow = 0; indexRow < values.length; indexRow++) {
                 var jsonElement = {};
@@ -35,13 +35,12 @@ export default class Tabla extends React.Component{
           
                 dataArray.push(jsonElement);
               }
-          
-              const fileName = nombreDeArchivoExcel;
+
               const ws = utils.json_to_sheet(dataArray);
-              const wb = { Sheets: { nombreDeHojaExcel: ws }, SheetNames: [nombreDeHojaExcel] }
-              const excelBuffer = write(wb, { bookType: 'xlsx', type: 'array' });
+              const wb = { Sheets: { 'data': ws }, SheetNames: ['data'] }
+              const excelBuffer = write(wb, { bookType: 'xlsx', type: 'array'});
               const data = new Blob([excelBuffer], { type: fileType });
-              saveAs(data, fileName + fileExtension);
+              saveAs(data, nombreDeArchivoExcel + fileExtension);
           
               // cancel default  CSV download from table
               return false;

@@ -24,7 +24,7 @@ export default class TablaUsuarios extends Tabla{
     const themeProps = this.GetTheme();
     const tableProps = {
       title: 'Usuarios con acceso al sistema',
-      options: this.GetOptions(),
+      options: this.GetOptions('Lista de usuarios', 'Usuarios'),
       theme: this.GetTheme(),
       columns: [
         {

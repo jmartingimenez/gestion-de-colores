@@ -16,7 +16,7 @@ export default function Usuarios() {
   const classes = useStyles();
   
   return (
-    <section className="seccion-colores">
+    <section className="seccion-usuarios">
       <Grid item>
       <TablaUsuarios />      
       </Grid>
