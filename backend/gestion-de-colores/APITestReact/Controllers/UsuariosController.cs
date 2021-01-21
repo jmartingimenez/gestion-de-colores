@@ -27,7 +27,7 @@ namespace APITestReact.Controllers
             _context = context;
         }
 
-        //GET usuarios/
+        //POST usuarios/
         [HttpPost]
         public object[] Usuarios()
         {

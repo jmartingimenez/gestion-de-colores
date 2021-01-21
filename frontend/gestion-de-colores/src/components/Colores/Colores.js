@@ -2,8 +2,7 @@ import './Colores.css';
 import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import { Divider } from '@material-ui/core';
-import TablaUsuarios from '../Tablas/TablaUsuarios';
+import TablaColores from '../Tablas/TablaColores';
 
 /*Estilo para la grilla definido aca*/
 const useStyles = makeStyles((theme) => ({
@@ -19,8 +18,9 @@ export default function Colores() {
     <section className="seccion-colores">
       <Grid item>
         <div>
-          Hola mundo!
-        </div>        
+          To Do: Ver agregar/editar color
+        </div>
+        <TablaColores />        
       </Grid>
     </section>
   )

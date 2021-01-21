@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using APITestReact.Attributes;
 using APITestReact.DAO;
 using APITestReact.DBModels;
+using APITestReact.DTO;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -27,17 +28,15 @@ namespace APITestReact.Controllers
 
         // GET colores/
         [HttpGet]
-        public ActionResult Get()
+        public object[] Get()
         {
             List<Color> colores = ColorDAO.GetAll(_context);
 
-            return new JsonResult(new { 
-                Colores = colores.Select(s => new {
-                    Id = s.Id,
-                    Nombre = s.Descripcion, 
-                    Creacion = s.FechaCreacion.ToString("dd/MM/yyyy")
-                }).OrderBy(o => o.Nombre).ToList()
-            });
+            return colores.Select(s => new {
+                Id = s.Id,
+                Nombre = s.Descripcion,
+                Creacion = s.FechaCreacion.ToString("dd/MM/yyyy")
+            }).OrderBy(o => o.Nombre).ToArray();
         }
 
         // GET colores/azul
@@ -85,9 +84,9 @@ namespace APITestReact.Controllers
         }
 
         [HttpDelete("eliminar")]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(IdentificadorDTO identificadorDTO)
         {
-            Color color = ColorDAO.Get(_context, id);
+            Color color = ColorDAO.Get(_context, identificadorDTO.Id);
 
             if (color == null) 
                 return NotFound("No se logró obtener el color que se desea eliminar.");

@@ -79,7 +79,22 @@ const AxiosService = {
         var url = this.API_URL + '/usuarios/logout';
     
         return this.SendRequest(method, url);
-    }    
+    },
+    
+    GetColorsData: function(){
+        var method = this.HTTP_METHOD_GET;
+        var url = this.API_URL + '/colores/';
+
+        return this.SendRequest(method, url);
+    },
+
+    RemoveColor: function(id){
+        var method = this.HTTP_METHOD_DELETE;
+        var url = this.API_URL + '/colores/eliminar';
+        var data = { id: id }
+
+        return this.SendRequest(method, url, data);
+    }
 }
 
 export default AxiosService;

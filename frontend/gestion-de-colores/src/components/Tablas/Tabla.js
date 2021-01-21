@@ -15,10 +15,11 @@ export default class Tabla extends React.Component{
         super(props);
     }
 
-    GetOptions(nombreDeArchivoExcel, nombreDeHojaExcel){
+    GetOptions(nombreDeArchivoExcel, nombreDeHojaExcel, customToolbar){
         return {
             filterType: 'textField',
             selectableRows: false,
+            customToolbar: customToolbar,
             onDownload: (buildHead, buildBody, columns, values) => {
               const fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
               const fileExtension = '.xlsx';
