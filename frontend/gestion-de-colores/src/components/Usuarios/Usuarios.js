@@ -1,20 +1,9 @@
 import './Usuarios.css';
-import React, {useState} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import { Divider } from '@material-ui/core';
 import TablaUsuarios from '../Tablas/TablaUsuarios';
 
-/*Estilo para la grilla definido aca*/
-const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
-    }
-}));
-
-export default function Usuarios() {
-  const classes = useStyles();
-  
+export default function Usuarios() {  
   return (
     <section className="seccion-usuarios">
       <Grid item>

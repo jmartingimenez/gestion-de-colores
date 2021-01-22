@@ -11,10 +11,6 @@ import MUIDataTable from "mui-datatables";
 import { MuiThemeProvider } from '@material-ui/core/styles';
 
 export default class Tabla extends React.Component{
-    constructor(props){
-        super(props);
-    }
-
     GetOptions(nombreDeArchivoExcel, nombreDeHojaExcel, customToolbar){
         return {
             filterType: 'textField',
