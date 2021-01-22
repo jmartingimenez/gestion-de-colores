@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace APITestReact.DTO
 {
-    public class IdentificadorDTO
+    public class PrimitiveDataDTO
     {
-        [Required]
         public int Id { get; set; }
+        public string Nombre { get; set; }
     }
 }

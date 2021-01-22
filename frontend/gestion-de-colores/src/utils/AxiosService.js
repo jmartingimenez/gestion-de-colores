@@ -88,6 +88,14 @@ const AxiosService = {
         return this.SendRequest(method, url);
     },
 
+    AddColor: function(color){
+        var method = this.HTTP_METHOD_POST;
+        var url = this.API_URL + '/colores';
+        var data = {nombre: color};
+
+        return this.SendRequest(method, url, data);
+    },
+
     RemoveColor: function(id){
         var method = this.HTTP_METHOD_DELETE;
         var url = this.API_URL + '/colores/eliminar';

@@ -27,11 +27,7 @@ export default function Login(){
                 usuarioContext.setLoggedIn(true);
                 localStorage.setItem('userKey', true);
                 history.push('/colores');
-                /*TO DO
-                - Redireccionar otra página
-                */
             }else{
-                //Seteo de mensaje de error
                 mensajeRef.current.updateMensaje(login.mensaje, login.esValido);
             }            
         });

@@ -55,8 +55,10 @@ namespace APITestReact.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post([FromBody] string nombre)
+        public ActionResult Post(PrimitiveDataDTO primitiveDataDTO)
         {
+            string nombre = primitiveDataDTO.Nombre;
+
             if (String.IsNullOrEmpty(nombre))
                 return BadRequest("Se debe ingresar un nombre de color");
 
@@ -84,9 +86,12 @@ namespace APITestReact.Controllers
         }
 
         [HttpDelete("eliminar")]
-        public ActionResult Delete(IdentificadorDTO identificadorDTO)
+        public ActionResult Delete(PrimitiveDataDTO primitiveDataDTO)
         {
-            Color color = ColorDAO.Get(_context, identificadorDTO.Id);
+            if (primitiveDataDTO == null || primitiveDataDTO.Id <= 0)
+                return BadRequest("Datos incorrectos. Reviselos.");
+
+            Color color = ColorDAO.Get(_context, primitiveDataDTO.Id);
 
             if (color == null) 
                 return NotFound("No se logró obtener el color que se desea eliminar.");

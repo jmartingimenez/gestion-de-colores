@@ -17,9 +17,6 @@ export default function Colores() {
   return (
     <section className="seccion-colores">
       <Grid item>
-        <div>
-          To Do: Ver agregar/editar color
-        </div>
         <TablaColores />        
       </Grid>
     </section>

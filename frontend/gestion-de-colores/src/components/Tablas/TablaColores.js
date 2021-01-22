@@ -1,10 +1,10 @@
 import React from 'react';
 import AxiosService from '../../utils/AxiosService';
 import { IconButton, Tooltip } from '@material-ui/core';
-import AddIcon from '@material-ui/icons/Add';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Tabla from './Tabla';
+import AddColorFormModal from '../Colores/Form/AddColorFormModal';
 
 export default class TablaColores extends Tabla{
   constructor(props){
@@ -22,20 +22,17 @@ export default class TablaColores extends Tabla{
     });
   }
 
+  HandleUpdate = (id, nombre, creacion) => {
+    const { data } = this.state;
+    data.push({Id: id, Nombre: nombre, Creacion: creacion});
+    data.sort((a, b) => a.Nombre.localeCompare(b.Nombre));
+    this.setState({ data });
+  }
+
   render(){
-    const customToolbar = () =>{
+    const customToolbar = () =>{      
       return (
-        <Tooltip title="Agregar">
-        <IconButton 
-          aria-label="Add" 
-          component="button" 
-          style={{"padding": 0}}
-          onClick = {() => {
-            alert("Agregar color");        
-          }}>
-            <AddIcon />
-          </IconButton>
-      </Tooltip> 
+        <AddColorFormModal data={this.state} update={this.HandleUpdate}/>
       );
     };
 
