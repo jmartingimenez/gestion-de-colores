@@ -67,9 +67,13 @@ namespace APITestReact.Controllers
             if (color != null)
                 return BadRequest("Este color ya existe. Ingrese uno diferente.");
 
-            ColorDAO.Add(_context, nombre);
+            color = ColorDAO.Add(_context, nombre);
 
-            return Ok("Color agregado exitosamente.");
+            return new JsonResult(new { 
+                Id = color.Id,
+                Nombre = color.Descripcion,
+                Creacion = color.FechaCreacion.ToString("dd/MM/yyyy")
+            });
         }
 
         [HttpPut("editar")]
