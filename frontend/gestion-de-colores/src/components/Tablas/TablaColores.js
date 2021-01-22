@@ -5,6 +5,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Tabla from './Tabla';
 import AddColorFormModal from '../Colores/Form/AddColorFormModal';
+import EditColorFormModal from '../Colores/Form/EditColorFormModal';
 
 export default class TablaColores extends Tabla{
   constructor(props){
@@ -22,17 +23,24 @@ export default class TablaColores extends Tabla{
     });
   }
 
-  HandleUpdate = (id, nombre, creacion) => {
+  HandleAddNewColor = (id, nombre, creacion) => {
     const { data } = this.state;
     data.push({Id: id, Nombre: nombre, Creacion: creacion});
     data.sort((a, b) => a.Nombre.localeCompare(b.Nombre));
     this.setState({ data });
   }
 
+  HandleUpdateColor = (id, nombre) => {
+    const { data } = this.state;
+    data.find(v => v.Id === id).Nombre = nombre.toUpperCase();
+    data.sort((a, b) => a.Nombre.localeCompare(b.Nombre));
+    this.setState({ data });    
+  }
+
   render(){
     const customToolbar = () =>{      
       return (
-        <AddColorFormModal data={this.state} update={this.HandleUpdate}/>
+        <AddColorFormModal data={this.state} add={this.HandleAddNewColor} />
       );
     };
 
@@ -61,19 +69,14 @@ export default class TablaColores extends Tabla{
             empty: true,
             customBodyRender: (value, tableMeta, updateValue) => {
               var id = tableMeta.rowData[0];
+              var nombre = tableMeta.rowData[1];
+
               return (
                 <>
-                  <Tooltip title="Editar">
-                    <IconButton 
-                      aria-label="Edit" 
-                      component="button" 
-                      style={{"padding": 0}}
-                      onClick = {() => {
-                        alert("Edit para color de id: " + id);
-                      }}>
-                        <EditIcon />
-                      </IconButton>
-                  </Tooltip> 
+                  <EditColorFormModal 
+                    data={{idEdit: id, nombreEdit: nombre}} 
+                    update={this.HandleUpdateColor}
+                  />
 
                   <Tooltip title="Eliminar">
                     <IconButton 

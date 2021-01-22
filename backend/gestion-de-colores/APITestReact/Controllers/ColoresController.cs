@@ -77,12 +77,22 @@ namespace APITestReact.Controllers
         }
 
         [HttpPut("editar")]
-        public ActionResult Put(int id, [FromBody] string nombre)
+        public ActionResult Put(PrimitiveDataDTO primitiveDataDTO)
         {
-            Color color = ColorDAO.Get(_context, id);
+            int id = primitiveDataDTO.Id;
+            string nombre = primitiveDataDTO.Nombre;
 
+            if (String.IsNullOrEmpty(nombre) || id <= 0)
+                return BadRequest("Datos incorrectos. Reviselos.");
+
+            Color color = ColorDAO.Get(_context, id);
             if (color == null)
                 return NotFound("No se logró obtener el color que se desea editar.");
+
+            bool colorEnUso = ColorDAO.Get(_context, nombre) != null;
+
+            if(colorEnUso)
+                return NotFound("El color ingresado se encuentra en uso. Ingrese otro.");
 
             ColorDAO.Update(_context, color, nombre);
 

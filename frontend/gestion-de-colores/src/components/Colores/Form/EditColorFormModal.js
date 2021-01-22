@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import { IconButton, Tooltip } from '@material-ui/core';
-import AddIcon from '@material-ui/icons/Add';
+import EditIcon from '@material-ui/icons/Edit';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -11,12 +11,19 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import AxiosService from '../../../utils/AxiosService';
 import Mensaje from '../../Mensaje/Mensaje';
 
-export default function AddColorFormModal(props) {
+export default function EditColorFormModal(props) {
   const [open, setOpen] = React.useState(false);
-  const [inputNuevoColor, setInputNuevoColor] = React.useState("");
+  const [idColor, setIdColor] = React.useState(0);
+  const [inputEditColor, setInputEditColor] = React.useState("To Do");
   const mensajeRef = React.useRef();
 
   const handleClickOpen = () => {
+    var id = props.data.idEdit;
+    var nombre = props.data.nombreEdit;
+
+    setIdColor(id);
+    setInputEditColor(nombre);
+
     setOpen(true);
   };
 
@@ -24,12 +31,11 @@ export default function AddColorFormModal(props) {
     setOpen(false);
   };
 
-  const handleCreateColor = () => {
-    AxiosService.AddColor(inputNuevoColor)
+  const handleEditColor = () => {
+    AxiosService.UpdateColor(idColor, inputEditColor)
     .then(res => {
       if(res.esValido){
-        var nuevoColor = res.mensaje;
-        props.add(nuevoColor.Id, nuevoColor.Nombre, nuevoColor.Creacion);
+        props.update(idColor, inputEditColor);
         setOpen(false);  
       }else{
         mensajeRef.current.updateMensaje(res.mensaje, res.esValido);
@@ -39,30 +45,31 @@ export default function AddColorFormModal(props) {
 
   return (
     <>
-      <Tooltip title="Agregar">
+      <Tooltip title="Editar">
         <IconButton 
-          aria-label="Add" 
+          aria-label="Edit" 
           component="button" 
           style={{"padding": 0}}
           onClick = {handleClickOpen}>
-            <AddIcon />
+            <EditIcon />
         </IconButton>
       </Tooltip>
 
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-agregar-color">Nuevo color</DialogTitle>
+        <DialogTitle id="form-editar-color">Editar color</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Desde este simple formulario se puede agregar un nuevo color. No se permiten 
+            Desde este simple formulario se puede editar el color seleccionado. No se permiten 
             colores existentes.
           </DialogContentText>
           <TextField
             autoFocus
             margin="dense"
-            id="inputNuevoColor"
-            label="Nuevo color"
+            id="inputEditColor"
+            label="Editar color"
             type="text"
-            onInput={e => setInputNuevoColor(e.target.value)}
+            value={inputEditColor}
+            onInput={e => setInputEditColor(e.target.value)}
             fullWidth
           />
           <Mensaje ref={mensajeRef}/>
@@ -71,7 +78,7 @@ export default function AddColorFormModal(props) {
           <Button onClick={handleClose} color="primary">
             Cancelar
           </Button>
-          <Button onClick={handleCreateColor} color="primary">
+          <Button onClick={handleEditColor} color="primary">
             Confirmar
           </Button>
         </DialogActions>
